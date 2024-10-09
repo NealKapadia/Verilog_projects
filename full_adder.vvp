@@ -1,0 +1,70 @@
+#! /c/iverilog/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_011B9D68 .scope module, "full_adder_tb" "full_adder_tb" 2 3;
+ .timescale 0 0;
+v011BE488_0 .var "a", 0 0;
+v011BE7F8_0 .var "b", 0 0;
+v011BE4E0_0 .var "ci", 0 0;
+v011BEAB8_0 .net "co", 0 0, L_011B8AB0; 1 drivers
+v011BE6F0_0 .net "s", 0 0, L_011BECD8; 1 drivers
+S_011BA6F8 .scope module, "add1" "full" 2 7, 3 1, S_011B9D68;
+ .timescale 0 0;
+L_011B82F0 .functor AND 1, v011BE488_0, v011BE7F8_0, C4<1>, C4<1>;
+L_011B8A08 .functor AND 1, v011BE488_0, v011BE4E0_0, C4<1>, C4<1>;
+L_011B8A78 .functor AND 1, v011BE7F8_0, v011BE4E0_0, C4<1>, C4<1>;
+L_011B8AB0 .functor OR 1, L_011B82F0, L_011B8A08, L_011B8A78, C4<0>;
+L_011BECD8 .functor XOR 1, v011BE488_0, v011BE7F8_0, v011BE4E0_0, C4<0>;
+v011B31D8_0 .net "a", 0 0, v011BE488_0; 1 drivers
+v011B3230_0 .net "b", 0 0, v011BE7F8_0; 1 drivers
+v011B3288_0 .net "ci", 0 0, v011BE4E0_0; 1 drivers
+v011B40D8_0 .alias "co", 0 0, v011BEAB8_0;
+v011B4130_0 .alias "s", 0 0, v011BE6F0_0;
+v011B4188_0 .net "w1", 0 0, L_011B82F0; 1 drivers
+v011B41E0_0 .net "w2", 0 0, L_011B8A08; 1 drivers
+v011BE7A0_0 .net "w3", 0 0, L_011B8A78; 1 drivers
+    .scope S_011B9D68;
+T_0 ;
+    %vpi_call 2 11 "$monitor", "At time %4t, a = %d, b = %d, ci = %d, s = %d, co = %d", $time, v011BE488_0, v011BE7F8_0, v011BE4E0_0, v011BE6F0_0, v011BEAB8_0;
+    %set/v v011BE488_0, 0, 1;
+    %set/v v011BE7F8_0, 0, 1;
+    %set/v v011BE4E0_0, 0, 1;
+    %delay 10, 0;
+    %set/v v011BE488_0, 0, 1;
+    %set/v v011BE7F8_0, 0, 1;
+    %set/v v011BE4E0_0, 1, 1;
+    %delay 10, 0;
+    %set/v v011BE488_0, 0, 1;
+    %set/v v011BE7F8_0, 1, 1;
+    %set/v v011BE4E0_0, 0, 1;
+    %delay 10, 0;
+    %set/v v011BE488_0, 0, 1;
+    %set/v v011BE7F8_0, 1, 1;
+    %set/v v011BE4E0_0, 1, 1;
+    %delay 10, 0;
+    %set/v v011BE488_0, 1, 1;
+    %set/v v011BE7F8_0, 0, 1;
+    %set/v v011BE4E0_0, 0, 1;
+    %delay 10, 0;
+    %set/v v011BE488_0, 1, 1;
+    %set/v v011BE7F8_0, 0, 1;
+    %set/v v011BE4E0_0, 1, 1;
+    %delay 10, 0;
+    %set/v v011BE488_0, 1, 1;
+    %set/v v011BE7F8_0, 1, 1;
+    %set/v v011BE4E0_0, 0, 1;
+    %delay 10, 0;
+    %set/v v011BE488_0, 1, 1;
+    %set/v v011BE7F8_0, 1, 1;
+    %set/v v011BE4E0_0, 1, 1;
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "full_adder_tb.v";
+    "./full_adder.v";

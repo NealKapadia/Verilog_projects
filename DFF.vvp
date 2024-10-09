@@ -1,0 +1,101 @@
+#! /c/iverilog/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_010CCE10 .scope module, "DFF_tb" "DFF_tb" 2 4;
+ .timescale -9 -9;
+v010CE2B8_0 .var "D", 0 0;
+v011255D0_0 .net "Q", 0 0, L_01100AD0; 1 drivers
+v01125260_0 .net "Qb", 0 0, L_01100DA8; 1 drivers
+v01124FF8_0 .var "R", 0 0;
+v01125158_0 .var "S", 0 0;
+v011252B8_0 .var "clk", 0 0;
+S_010CD360 .scope module, "DFF0" "DFF" 2 9, 3 1, S_010CCE10;
+ .timescale -9 -9;
+L_010CE930 .functor NOT 1, v010CE2B8_0, C4<0>, C4<0>, C4<0>;
+L_010CEE90 .functor NOT 1, v011252B8_0, C4<0>, C4<0>, C4<0>;
+L_010CEF00 .functor NAND 1, v010CE2B8_0, v011252B8_0, C4<1>, C4<1>;
+L_010CB1E8 .functor NAND 1, v011252B8_0, L_010CE930, C4<1>, C4<1>;
+L_010CB290 .functor NAND 1, L_010CEF00, L_010CB140, v01125158_0, C4<1>;
+L_010CB140 .functor NAND 1, L_010CB290, L_010CB1E8, v01124FF8_0, C4<1>;
+L_010CB370 .functor NAND 1, L_010CB290, L_010CEE90, C4<1>, C4<1>;
+L_010CB3E0 .functor NAND 1, L_010CB140, L_010CEE90, C4<1>, C4<1>;
+L_010CB098 .functor NAND 1, L_010CB0D0, L_010CB370, v01125158_0, C4<1>;
+L_010CB0D0 .functor NAND 1, L_010CB098, L_010CB3E0, v01124FF8_0, C4<1>;
+L_01100AD0 .functor BUFZ 1, L_010CB098, C4<0>, C4<0>, C4<0>;
+L_01100DA8 .functor BUFZ 1, L_010CB0D0, C4<0>, C4<0>, C4<0>;
+v010CE578_0 .net "D", 0 0, v010CE2B8_0; 1 drivers
+v010CE100_0 .net "Db", 0 0, L_010CE930; 1 drivers
+v010CE368_0 .alias "Q", 0 0, v011255D0_0;
+v010CE6D8_0 .alias "Qb", 0 0, v01125260_0;
+v010CE208_0 .net "R", 0 0, v01124FF8_0; 1 drivers
+v010CE628_0 .net "S", 0 0, v01125158_0; 1 drivers
+v010CE260_0 .net "clk", 0 0, v011252B8_0; 1 drivers
+v010CE3C0_0 .net "clkb", 0 0, L_010CEE90; 1 drivers
+v010CE5D0_0 .net "w1", 0 0, L_010CEF00; 1 drivers
+v010CE520_0 .net "w2", 0 0, L_010CB1E8; 1 drivers
+v010CE730_0 .net "w3", 0 0, L_010CB290; 1 drivers
+v010CE050_0 .net "w4", 0 0, L_010CB140; 1 drivers
+v010CE680_0 .net "w5", 0 0, L_010CB370; 1 drivers
+v010CE0A8_0 .net "w6", 0 0, L_010CB3E0; 1 drivers
+v010CE158_0 .net "w7", 0 0, L_010CB098; 1 drivers
+v010CE1B0_0 .net "w8", 0 0, L_010CB0D0; 1 drivers
+    .scope S_010CCE10;
+T_0 ;
+    %set/v v010CE2B8_0, 0, 1;
+    %end;
+    .thread T_0;
+    .scope S_010CCE10;
+T_1 ;
+    %set/v v011252B8_0, 0, 1;
+    %end;
+    .thread T_1;
+    .scope S_010CCE10;
+T_2 ;
+    %set/v v01125158_0, 1, 1;
+    %end;
+    .thread T_2;
+    .scope S_010CCE10;
+T_3 ;
+    %set/v v01124FF8_0, 1, 1;
+    %end;
+    .thread T_3;
+    .scope S_010CCE10;
+T_4 ;
+    %set/v v011252B8_0, 0, 1;
+    %end;
+    .thread T_4;
+    .scope S_010CCE10;
+T_5 ;
+    %load/v 8, v011252B8_0, 1;
+    %inv 8, 1;
+    %set/v v011252B8_0, 8, 1;
+    %delay 10, 0;
+    %jmp T_5;
+    .thread T_5;
+    .scope S_010CCE10;
+T_6 ;
+    %vpi_call 2 19 "$monitor", "At time %4t, clk = %d S = %d R = %d D = %d Q = %d Qb = %d", $time, v011252B8_0, v01125158_0, v01124FF8_0, v010CE2B8_0, v011255D0_0, v01125260_0;
+    %vpi_call 2 20 "$dumpfile", "DFF.vcd";
+    %vpi_call 2 21 "$dumpvars", 1'sb0, S_010CCE10;
+    %set/v v01125158_0, 0, 1;
+    %delay 4, 0;
+    %set/v v01125158_0, 1, 1;
+    %delay 4, 0;
+    %set/v v010CE2B8_0, 0, 1;
+    %delay 45, 0;
+    %set/v v010CE2B8_0, 1, 1;
+    %delay 40, 0;
+    %set/v v010CE2B8_0, 0, 1;
+    %delay 40, 0;
+    %vpi_call 2 27 "$finish";
+    %end;
+    .thread T_6;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "DFF_tb.v";
+    "./DFF.v";
